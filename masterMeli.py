@@ -6,7 +6,6 @@
 
 from datetime import datetime
 import requests
-import json
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -36,10 +35,9 @@ def chart(keywords_input):
     keywords = keywords_input.replace(" ","+")
     url = "https://api.mercadolibre.com/sites/MLA/search?q="+keywords+"&condition=new&limit=50"  # Endpoint a consultar
     response = requests.get(url)
-    data = json.loads(response.text)
-    results=pd.DataFrame(data["results"])
+    results=pd.DataFrame(response.json()["results"])
 
-    fig = px.histogram(results['price'],histnorm="percent",nbins=15)# y="tip", color="sex", marginal="rug",hover_data=df.columns
+    fig = px.histogram(results['price'],histnorm="percent",nbins=10)# y="tip", color="sex", marginal="rug",hover_data=df.columns
     fig.layout.update(showlegend=True, 
                       legend = {"title":{'text':""}},
                       yaxis =  {"title": {"text": "Densidad"}},
@@ -59,5 +57,5 @@ if keywords_input!="Ingrese una búsqueda":
     chart(keywords_input)
 
 
-# In[6]:
+
 
