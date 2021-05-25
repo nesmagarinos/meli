@@ -24,16 +24,16 @@ data = json.loads(response.text)
 results=pd.DataFrame(data["results"])
 
 
-# In[63]:
+# In[66]:
 
 
-results.columns
+results
 
 
-# In[62]:
+# In[65]:
 
 
-resultsa
+get_ipython().system(' jupyter nbconvert --to script masterMeli.ipynb')
 
 
 # In[ ]:
