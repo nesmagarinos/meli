@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[52]:
+# In[1]:
 
 
 from datetime import datetime
@@ -11,7 +11,7 @@ import streamlit as st
 import plotly.express as px
 
 
-# In[53]:
+# In[2]:
 
 
 st.write("""
@@ -19,13 +19,13 @@ st.write("""
 """)
 
 
-# In[54]:
+# In[3]:
 
 
 keywords_input = st.text_input("Búsqueda", "Ingrese una búsqueda")
 
 
-# In[55]:
+# In[4]:
 
 
 url_dict = "https://api.mercadolibre.com/sites/MLA/"
@@ -73,12 +73,23 @@ def chart(keywords_input):
     return base_final
 
 
-# In[65]:
+# In[ ]:
 
 
 if keywords_input!="Ingrese una búsqueda":
     chart(keywords_input)
-else:
-    chart("Televisor 40 pulgadas")
+
+
+# In[65]:
+
+
+# if keywords_input!="Ingrese una búsqueda":
+#     chart(keywords_input)
+# else:
+#     chart("Televisor 40 pulgadas")
+
+
+
+
 
 
