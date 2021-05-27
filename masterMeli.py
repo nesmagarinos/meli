@@ -9,7 +9,6 @@ import requests
 import pandas as pd
 import plotly.express as px
 import unidecode
-import locale
 
 
 # In[2]:
@@ -24,7 +23,6 @@ st.write("""
 
 
 keywords_input = st.text_input("Búsqueda", "Ingrese una búsqueda")
-locale.setlocale(locale.LC_ALL, 'Spanish_Argentina.1252' )
 
 
 # In[9]:
@@ -105,7 +103,7 @@ def _chart(base):
     st.plotly_chart(fig)
 
 
-# In[91]:
+# In[106]:
 
 
 def _table(base):
@@ -114,13 +112,14 @@ def _table(base):
     for cat in categories:
         base_cat = base_final[base_final['category_name']==cat]
         precio_promedio = (base_cat['price']*base_cat['sold_quantity']).sum()/base_cat['sold_quantity'].sum()
-        precio_promedio_currency = locale.currency(precio_promedio, grouping = True ).split(",")[0]
+        precio_promedio_currency = "${:,.2f}". format(precio_promedio).split(".")[0].replace(",",".")
         ventas=base_cat['sold_quantity'].sum()
         publicaciones=base_cat.shape[0]
         lista_precio_promedio.append([cat,publicaciones,ventas,precio_promedio_currency])
     
     lista_final = pd.DataFrame(lista_precio_promedio,columns=['Categoría','Publicaciones analizadas','Ventas analizadas','Precio promedio ponderado'])
     st.dataframe(lista_final)
+    return lista_final
 
 
 # In[93]:
@@ -132,7 +131,7 @@ if keywords_input!="Ingrese una búsqueda":
     _chart(base)
 
 
-# In[ ]:
+# In[98]:
 
 
 get_ipython().system(' jupyter nbconvert --to script masterMeli.ipynb')
