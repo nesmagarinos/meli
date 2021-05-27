@@ -25,13 +25,13 @@ st.write("""
 keywords_input = st.text_input("Búsqueda", "Ingrese una búsqueda")
 
 
-# In[4]:
+# In[62]:
 
 
 categories_dict_final = pd.read_csv("categories.csv")
 
 
-# In[5]:
+# In[63]:
 
 
 def _base(keywords_input):
@@ -66,7 +66,7 @@ def _base(keywords_input):
     return base_final
 
 
-# In[58]:
+# In[64]:
 
 
 def _chart(base):
@@ -105,7 +105,7 @@ def _chart(base):
     fig.show()
 
 
-# In[7]:
+# In[65]:
 
 
 def _table(base_final):
@@ -131,6 +131,10 @@ if keywords_input!="Ingrese una búsqueda":
     base = _base(keywords_input)
     _chart(base)
     _table(base)
+else:
+    base = _base("Televisor 50 pulgadas")
+    _chart(base)
+    _table(base)    
 
 
 
