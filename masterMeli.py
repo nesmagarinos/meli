@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[14]:
+# In[1]:
 
 
 import streamlit as st
@@ -19,19 +19,19 @@ st.write("""
 """)
 
 
-# In[5]:
+# In[3]:
 
 
 keywords_input = st.text_input("Búsqueda", "Ingrese una búsqueda")
 
 
-# In[9]:
+# In[4]:
 
 
 categories_dict_final = pd.read_csv("categories.csv")
 
 
-# In[59]:
+# In[5]:
 
 
 def _base(keywords_input):
@@ -66,7 +66,7 @@ def _base(keywords_input):
     return base_final
 
 
-# In[71]:
+# In[58]:
 
 
 def _chart(base):
@@ -77,12 +77,12 @@ def _chart(base):
     ncharts = base_final['category_name'].nunique()
     nbins = 20 if ncharts==1 else ncharts*15
 
-    base_final['pct']=base_final.groupby('category_name')['sold_quantity'].apply(lambda x: x/x.sum())
-    base_final = base_final[base_final['pct']>0.01].copy()
+    base_final['Porcentaje']=base_final.groupby('category_name')['sold_quantity'].apply(lambda x: x/x.sum())
+    base_final = base_final[base_final['Porcentaje']>0.01].copy()
+    base_final['Porcentaje']=base_final.groupby('category_name')['sold_quantity'].apply(lambda x: x/x.sum())
+    base_final['Porcentaje']=(base_final['Porcentaje']*100).astype(int)
 
-
-
-    fig = px.histogram(x=base_final['price'],y=base_final['sold_quantity'],color=base_final['category_name'],
+    fig = px.histogram(x=base_final['price'],y=base_final['Porcentaje'],color=base_final['category_name'],
                        nbins=nbins,barmode="overlay")
 
     fig.layout.update(showlegend=True,
@@ -90,20 +90,22 @@ def _chart(base):
                       hoverlabel=dict(bgcolor="white"),
                       legend = {"title":{'text':"Categoría"}}) 
 
-    fig.update_traces(hovertemplate ='<b>Rango de precios</b>: '+'%{x}'+'<extra></extra><br><b>Unidades vendidas</b>: '+'%{y}',
+    fig.update_traces(hovertemplate ='<b>Rango de precios</b>: '+'%{x}'+'<extra></extra><br><b>Porcentaje de unidades vendidas</b>: '+'%{y}'+"%",
                       selector=dict(type="histogram"))
 
     
     fig.update_xaxes({"title": {"text": "Precio"}},visible=True)
-    fig.update_yaxes({"title": {"text": "Unidades vendidas"}})
+    fig.update_yaxes({"title": {"text": "Porcentaje de unidades vendidas"}})
     fig.update_layout(title={'text': "Búsqueda: "+keywords_input,
                             'x':0.5,'xanchor': 'center','yanchor': 'top','font':{'size':16}})
     
+    
 
     st.plotly_chart(fig)
+    fig.show()
 
 
-# In[106]:
+# In[7]:
 
 
 def _table(base_final):
@@ -117,7 +119,8 @@ def _table(base_final):
         publicaciones=base_cat.shape[0]
         lista_precio_promedio.append([cat,publicaciones,ventas,precio_promedio_currency])
     
-    lista_final = pd.DataFrame(lista_precio_promedio,columns=['Categoría','Publicaciones analizadas','Ventas analizadas','Precio promedio ponderado'])
+    lista_final = pd.DataFrame(lista_precio_promedio,columns=['Categoría','Publicaciones','Ventas','Precio promedio ponderado'])
+    st.text('Publicaciones analizadas:')
     st.dataframe(lista_final)
 
 
@@ -126,8 +129,9 @@ def _table(base_final):
 
 if keywords_input!="Ingrese una búsqueda":
     base = _base(keywords_input)
-    _table(base)
     _chart(base)
+    _table(base)
+
 
 
 
