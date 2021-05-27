@@ -106,7 +106,7 @@ def _chart(base):
 # In[106]:
 
 
-def _table(base):
+def _table(base_final):
     categories = base_final['category_name'].unique()    
     lista_precio_promedio= []
     for cat in categories:
@@ -119,25 +119,16 @@ def _table(base):
     
     lista_final = pd.DataFrame(lista_precio_promedio,columns=['Categoría','Publicaciones analizadas','Ventas analizadas','Precio promedio ponderado'])
     st.dataframe(lista_final)
-    return lista_final
 
 
 # In[93]:
 
 
 if keywords_input!="Ingrese una búsqueda":
-    _base(keywords_input)
+    base = _base(keywords_input)
     _table(base)
     _chart(base)
 
-
-# In[98]:
-
-
-get_ipython().system(' jupyter nbconvert --to script masterMeli.ipynb')
-
-
-# In[ ]:
 
 
 
