@@ -13,11 +13,14 @@ import unidecode
 
 # In[2]:
 
-
-st.image("https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1456160088/dauw8qmiutpmqx4wvwlf.png")
-st.write("""
-## Buscador de precios
-""")
+title_container = st.beta_container()
+col1, col2 = st.beta_columns([1, 20])
+with title_container:
+    with col1:
+        st.image("https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1456160088/dauw8qmiutpmqx4wvwlf.png")
+    with col2:
+        st.markdown('<h1 style="color: purple;">Buscador de precios</h1>',
+                    unsafe_allow_html=True)
 
 
 # In[3]:
