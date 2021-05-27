@@ -14,7 +14,7 @@ import unidecode
 # In[2]:
 
 
-st.markdown("![Mercado Libre]<h1 style='text-align: center; color: red;'>Some title(https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1456160088/dauw8qmiutpmqx4wvwlf.png</h1>")
+st.markdown("<img src="Meli_Logo.png" alt="MercadoLibre" class="center">")
 st.write("""
 ## Buscador de precios
 """)
