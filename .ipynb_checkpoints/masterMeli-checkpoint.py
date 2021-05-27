@@ -14,6 +14,7 @@ import unidecode
 # In[2]:
 
 
+st.markdown("![Mercado Libre](https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1456160088/dauw8qmiutpmqx4wvwlf.png)")
 st.write("""
 ## Buscador de precios
 """)
@@ -135,9 +136,5 @@ else:
     base = _base("Televisor 50 pulgadas")
     _chart(base)
     _table(base)    
-
-
-
-
 
 
