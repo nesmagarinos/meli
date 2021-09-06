@@ -13,8 +13,8 @@ import unidecode
 
 # In[2]:
 
-title_container = st.beta_container()
-col1, col2 = st.beta_columns([30, 10])
+title_container = st.container()
+col1, col2 = st.columns([30, 10])
 with title_container:
     with col2:
         st.image("https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1456160088/dauw8qmiutpmqx4wvwlf.png")
