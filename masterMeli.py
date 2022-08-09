@@ -135,7 +135,7 @@ if keywords_input!="Ingrese una búsqueda":
     _chart(base)
     _table(base)
 else:
-    base = _base("Televisor 50 pulgadas")
+    base = _base("Pantalla")
     _chart(base)
     _table(base)    
 
